@@ -89,3 +89,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Add drop shadow */
   width: 95px;
 }
+
+.tablePage {
+  display: flex;
+  margin-top: -20px;
+}

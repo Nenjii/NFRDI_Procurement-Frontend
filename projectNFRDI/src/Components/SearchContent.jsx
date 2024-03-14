@@ -16,7 +16,7 @@ const SearchContent = ({ searchTerm }) => {
   }, [searchTerm]);
 
   function getSearch() {
-    axios.get("http://localhost:5000/getProject").then(function (response) {
+    axios.get("http://10.0.224.100:5000/getProject").then(function (response) {
       const searchData = response.data.filter((item) => {
         // Convert item.type to its string representation
         let itemType = "";
@@ -89,7 +89,7 @@ const SearchContent = ({ searchTerm }) => {
         </div>
       ))}
 
-      <div>
+      <div className={style.tableNextPage} style={{ margin: "0px 0" }}>
         <NextPages />
       </div>
     </div>

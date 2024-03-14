@@ -99,6 +99,10 @@ const CalendarYear = () => {
     return finalDate.toLocaleDateString("en-US", options);
   };
 
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("projects")));
+  }, []);
+
   return (
     <div>
       <div className={style.bodyCalendarYear}>

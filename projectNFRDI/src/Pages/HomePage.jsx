@@ -10,7 +10,7 @@ import axios from "axios";
 const HomePage = () => {
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getProject")
+      .get("http://10.0.224.100:5000/getProject")
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("projects", JSON.stringify(res.data));
