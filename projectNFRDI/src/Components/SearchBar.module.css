@@ -1,0 +1,50 @@
+@import url("All_Fonts.css");
+
+.bodySearchBar {
+  position: sticky;
+  display: flex;
+  padding-top: 2.1875rem;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+input {
+  padding-top: 0.625rem;
+  width: 62.5rem;
+  font-size: 1.625rem;
+  font-family: MontBold;
+  box-sizing: border-box;
+  border: 0.125rem #f5f5f5 solid;
+  background-color: transparent;
+  color: #f5f5f5;
+  text-align: center;
+  margin-left: 6.25rem;
+  position: relative;
+}
+
+.placeholdercolor::selection {
+  background-color: #69ddff;
+  color: #3b5998;
+}
+
+.placeholdercolor:focus {
+  outline-color: #3b5998;
+}
+
+.placeholdercolor::placeholder {
+  color: #f5f5f5;
+}
+
+.bodySearchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0.625rem;
+}
+
+.bodySearchButton:hover {
+  color: #69ddff;
+  cursor: pointer;
+  transform: scale(110%);
+}

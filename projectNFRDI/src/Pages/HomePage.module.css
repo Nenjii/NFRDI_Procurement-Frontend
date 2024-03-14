@@ -1,0 +1,12 @@
+@import url("../Components/All_Fonts.css");
+
+/* Container Styles */
+.container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../../public/images/BkgImage2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}

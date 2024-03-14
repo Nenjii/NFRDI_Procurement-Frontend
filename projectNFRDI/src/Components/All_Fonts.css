@@ -1,0 +1,31 @@
+/*Montserrat*/
+@font-face {
+  font-family: MontReg;
+  src: url("../../public/fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+  font-family: MontSemiBold;
+  src: url("../../public/fonts/Montserrat-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: MontBold;
+  src: url("../../public/fonts/Montserrat-Bold.ttf");
+}
+
+/* Garamound */
+@font-face {
+  font-family: GaraMed;
+  src: url("../../public/fonts/CormorantGaramond-Medium.ttf");
+}
+
+@font-face {
+  font-family: GaraBoldIta;
+  src: url("../../public/fonts/CormorantGaramond-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: GaraBold;
+  src: url("../../public/fonts/CormorantGaramond-Bold.ttf");
+}

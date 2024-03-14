@@ -1,0 +1,21 @@
+@import url("All_Fonts.css");
+
+.bodyTitle {
+  display: flex;
+  flex-direction: column;
+  padding-top: 7.5rem;
+  padding-left: 6.25rem;
+  color: #f5f5f5;
+  font-size: 5rem;
+  z-index: 1;
+  position: relative;
+}
+
+.bodyContentTitle1 {
+  font-family: GaraMed;
+}
+
+.bodyContentTitle2,
+.bodyContentTitle3 {
+  font-family: GaraBoldIta;
+}

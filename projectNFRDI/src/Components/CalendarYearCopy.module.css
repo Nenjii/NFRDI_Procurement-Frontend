@@ -1,0 +1,689 @@
+@import url("All_Fonts.css");
+
+.bodyCalendarYear {
+  position: absolute; /* Fix the position of the calendar */
+  font-family: MontBold;
+  font-size: 30px;
+  color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  background-color: #3b5998;
+  justify-content: flex-start; /* Change from 'top' to 'flex-start' */
+  align-items: center;
+  left: 84%; /* Adjust left position instead of margin-left */
+  padding-top: 10px;
+  width: 16%;
+  height: 85vh;
+  z-index: 1000; /* Ensure the calendar year component is above other content */
+}
+
+.animateCharacter {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #3b5998 0%,
+    #1da1f2 29%,
+    #69ddff 67%,
+    #f5f5f5 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 32px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.txtCalendarYear {
+  padding-bottom: 20px;
+  border-bottom: #f5f5f5 solid 2px;
+}
+
+.bodyContentCY {
+  overflow-y: auto;
+  width: 75%;
+}
+
+.bodyContentCY::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+.bodyContentCY::-webkit-scrollbar-thumb {
+  background: #f5f5f5; /* Set the color of the scrollbar thumb */
+}
+
+.bodyContentCY::-webkit-scrollbar-thumb:hover {
+  background: #1da1f2; /* Set the color of the scrollbar thumb on hover */
+}
+
+.CY2024,
+.CY2023,
+.CY2022,
+.CY2021,
+.CY2020,
+.CY2019,
+.CY2018,
+.CY2017,
+.CY2016 {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 70px;
+}
+
+.CY2015 {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  padding-bottom: 35px;
+}
+
+.CYotherYears {
+  display: flex;
+  align-items: center;
+  padding-top: 30px;
+  font-size: 15px;
+  padding-bottom: 30px;
+  border-top: #f5f5f5 2px solid;
+}
+
+.Add {
+  padding-right: 5px;
+}
+
+.CY2024:hover,
+.CY2023:hover,
+.CY2022:hover,
+.CY2021:hover,
+.CY2020:hover,
+.CY2019:hover,
+.CY2018:hover,
+.CY2017:hover,
+.CY2016:hover,
+.CY2015:hover,
+.CYotherYears:hover {
+  color: #69ddff;
+  cursor: pointer;
+}
+
+.CY2024.active,
+.CY2023.active,
+.CY2022.active,
+.CY2021.active,
+.CY2020.active,
+.CY2019.active,
+.CY2018.active,
+.CY2017.active,
+.CY2016.active,
+.CY2015.active {
+  color: #69ddff;
+}
+
+.CYContent2024,
+.CYContent2023,
+.CYContent2022,
+.CYContent2021,
+.CYContent2020,
+.CYContent2019,
+.CYContent2018,
+.CYContent2017,
+.CYContent2016,
+.CYContent2015 {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+  max-height: 300px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.Bidding2024,
+.Bidding2023,
+.Bidding2022,
+.Bidding2021,
+.Bidding2020,
+.Bidding2019,
+.Bidding2018,
+.Bidding2017,
+.Bidding2016,
+.Bidding2015 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25px;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.Alternative2024,
+.Alternative2023,
+.Alternative2022,
+.Alternative2021,
+.Alternative2020,
+.Alternative2019,
+.Alternative2018,
+.Alternative2017,
+.Alternative2016,
+.Alternative2015 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25px;
+  width: 100%;
+  padding-bottom: 50px;
+  padding-right: 1px;
+}
+
+.Bidding2024:hover,
+.Bidding2023:hover,
+.Bidding2022:hover,
+.Bidding2021:hover,
+.Bidding2020:hover,
+.Bidding2019:hover,
+.Bidding2018:hover,
+.Bidding2017:hover,
+.Bidding2016:hover,
+.Bidding2015:hover {
+  color: #69ddff;
+  cursor: pointer;
+}
+
+.Alternative2024:hover,
+.Alternative2023:hover,
+.Alternative2022:hover,
+.Alternative2021:hover,
+.Alternative2020:hover,
+.Alternative2019:hover,
+.Alternative2018:hover,
+.Alternative2017:hover,
+.Alternative2016:hover,
+.Alternative2015:hover {
+  color: #69ddff;
+  cursor: pointer;
+}
+
+.Bidding2024.active,
+.Bidding2023.active,
+.Bidding2022.active,
+.Bidding2021.active,
+.Bidding2020.active,
+.Bidding2019.active,
+.Bidding2018.active,
+.Bidding2017.active,
+.Bidding2016.active,
+.Bidding2015.active,
+.Alternative2024.active,
+.Alternative2023.active,
+.Alternative2022.active,
+.Alternative2021.active,
+.Alternative2020.active,
+.Alternative2019.active,
+.Alternative2018.active,
+.Alternative2017.active,
+.Alternative2016.active,
+.Alternative2015.active {
+  color: #69ddff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#YearLines:after {
+  margin-top: 0px;
+  background: none repeat scroll 0 0 transparent;
+  content: "";
+  display: inline-block;
+  height: 3px;
+  left: 50%;
+  position: sticky;
+  background: #69ddff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+#YearLines:hover:after {
+  margin-top: 32px;
+  width: 100px;
+  left: 60px;
+  position: sticky;
+  margin-top: 0;
+}
+
+@media screen and (max-height: 100px) {
+  ul {
+    margin-top: 40px;
+  }
+}
+
+/*TABLE DESIGN*/
+.tablebiddingcontainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 79.9%;
+  margin-top: 5%;
+  z-index: 99;
+  padding-bottom: 30px;
+  height: 69.8vh;
+}
+
+.tablealternativecontainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80%;
+  margin-top: 5%;
+  z-index: 99;
+  padding-bottom: 30px;
+  height: 69.8vh;
+}
+
+.tablebiddingcontainer {
+  max-height: 300vh;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.tablealternativecontainer {
+  max-height: 300vh;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tablebiddingcontainer,
+.tablealternativecontainer {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.TableContent {
+  width: 100%;
+  border-collapse: collapse;
+  align-items: center;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  font-family: MontBold;
+  background-color: #3b5998;
+  font-weight: bold;
+  text-align: center;
+  color: #f5f5f5;
+}
+
+h2 {
+  display: flex;
+  font-family: MontBold;
+  justify-content: center;
+  width: 98.5%;
+  color: #3b5998;
+  border: 2px solid #3b5998;
+  margin: 0;
+  padding: 10px;
+}
+
+td {
+  font-family: MontSemiBold;
+  color: #3b5998;
+}
+
+.viewbutton {
+  background-color: #3b5998;
+  font-family: MontBold;
+  color: #69ddff;
+  padding: 10px;
+  border: none;
+  width: 70px;
+}
+
+.viewbutton:hover {
+  cursor: pointer;
+  background-color: #1da1f2;
+  transform: scale(110%);
+}
+
+.viewbutton.active {
+  background-color: #f5f5f5;
+}
+
+.viewbutton:focus {
+  border: #3b5998 2px solid;
+}
+
+@-webkit-keyframes extend {
+  0% {
+    width: 70px;
+    border-radius: 100px;
+  }
+  10% {
+    width: 70px;
+    background: #fff;
+    margin-left: -5px;
+    margin-top: -5px;
+  }
+  20% {
+    width: 70px;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  100% {
+    width: 70px;
+  }
+}
+@keyframes extend {
+  0% {
+    width: 70px;
+  }
+  10% {
+    width: 70px;
+    background: #fff;
+    margin-left: -5px;
+    margin-top: -5px;
+  }
+  20% {
+    width: 70px;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  100% {
+    width: 70px;
+    border-radius: 100px;
+  }
+}
+
+@-webkit-keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    color: #fff;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    color: #fff;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+button:focus {
+  /*animation*/
+  -webkit-animation: extend 1s ease-in-out;
+  -ms-animation: extend 1s ease-in-out;
+  animation: extend 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  /* Chrome, Safari, Opera */
+  animation-fill-mode: forwards;
+}
+
+button:focus > span {
+  /*animation*/
+  -webkit-animation: disappear 1s ease-in-out;
+  -ms-animation: disappear 1s ease-in-out;
+  animation: disappear 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  /* Chrome, Safari, Opera */
+  animation-fill-mode: forwards;
+}
+
+.view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 1;
+}
+
+button:focus > .view {
+  /*animation*/
+  -webkit-animation: appear 1s ease-in-out;
+  -ms-animation: appear 1s ease-in-out;
+  animation: appear 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  /* Chrome, Safari, Opera */
+  animation-fill-mode: forwards;
+}
+
+.TableColumnColor th {
+  border: 2px solid #f5f5f5;
+}
+
+.TableRowColor td {
+  border: 2px solid #3b5998;
+  color: #3b5998;
+}
+
+.Ongoing {
+  width: 50%;
+  background-color: #1da1f2;
+  color: #3b5998;
+  border: #f5f5f5 2px solid;
+}
+
+.Completed {
+  border: #f5f5f5 2px solid;
+  width: 50%;
+  background-color: #1da1f2;
+  color: #3b5998;
+}
+
+.Choose {
+  position: absolute;
+  font-family: MontBold;
+  color: #1da1f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 500px;
+  padding: 10px;
+  cursor: help;
+  margin-top: 300px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  color: #f5f5f5;
+}
+
+.TableContent th {
+  padding: 10px; /* Adjust padding as needed */
+}
+
+/* Define styles for the "Ongoing" and "Completed" headers */
+.Ongoing,
+.Completed {
+  cursor: pointer;
+}
+
+/* Define hover effect for the headers */
+.Ongoing:hover,
+.Completed:hover {
+  background-color: #69ddff;
+}
+
+/* Define active effect for the "Ongoing" and "Completed" headers */
+.Ongoing.active,
+.Completed.active {
+  background-color: #3b5998; /* Background color for active state */
+  color: white; /* Text color for active state */
+}
+
+/* Define active effect for the headers when focused */
+.Ongoing:focus,
+.Completed:focus {
+  background-color: #69ddff; /* Background color for focused state */
+  color: white; /* Text color for focused state */
+  outline: none; /* Remove outline */
+}
+
+.tablePage {
+  color: #3b5998;
+  font-family: MontBold;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.tablePageNumber {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  font-family: MontSemiBold;
+}
+
+.tableNextPage {
+  display: flex;
+  align-items: center;
+}
+
+.tableNextIcon {
+  display: flex;
+  align-self: center;
+}
+
+.tableNextPage:hover {
+  cursor: pointer;
+}
+
+/* CalendarYear.module.css */
+
+.pdfViewerContainer {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  margin-left: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: #3b5998;
+  padding: 40px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.pdfViewerContainer iframe {
+  margin-top: -180px;
+  width: 100%;
+  height: 80vh; /* Adjust height as needed */
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.viewInNewTabButton {
+  font-size: 0.625rem;
+  font-family: MontBold;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  margin: 0.3125rem;
+  margin-right: 4.375rem;
+  padding: 0.3125rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: none;
+  color: #f5f5f5;
+  z-index: 10;
+  margin-top: 0;
+}
+
+.viewInNewTabButton:hover {
+  color: #69ddff;
+}
+
+.closeButton {
+  font-size: 10px;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  cursor: pointer;
+  margin: 5px;
+  margin-right: 10px;
+  font-family: MontBold;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: none;
+  color: #f5f5f5;
+}
+
+.closeButton:hover {
+  color: red;
+  font-family: MontBold;
+}
