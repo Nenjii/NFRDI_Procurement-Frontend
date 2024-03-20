@@ -255,108 +255,109 @@ const CalendarYear = () => {
                       </thead>
                       <tbody className={style.TableRowColor}>
                         {projectList &&
-                          projectList.map((data, index) => {
-                            // Check if the project is ongoing or completed based on the status field in your database
-                            const isOngoing =
-                              data.status.toLowerCase() === "ongoing";
-                            const isCompleted =
-                              data.status.toLowerCase() === "completed";
-
-                            // Render the row only if it matches the ongoing/completed status
-                            if (
-                              (isOngoing && isOngoingActive) ||
-                              (isCompleted && isCompletedActive)
-                            ) {
+                          projectList
+                            .filter((data) => {
+                              const projectYear = new Date(data.date_published)
+                                .getFullYear()
+                                .toString();
+                              const isBidding = data.type === 1;
+                              const isOngoing =
+                                data.status.toLowerCase() === "ongoing";
+                              const isCompleted =
+                                data.status.toLowerCase() === "completed";
                               return (
-                                <tr key={index}>
-                                  <td>{data.pr_no}</td>
-                                  <td>{data.title}</td>
-                                  <td>{data.contractor}</td>
-                                  <td>{data.contract_amount}</td>
-                                  <td>
-                                    {data.bac_resolution && (
-                                      <button
-                                        className={style.viewbutton}
-                                        onClick={() =>
-                                          handlePdfView(
-                                            "http://localhost:5000/" +
-                                              data.bac_resolution
-                                          )
-                                        }
-                                      >
-                                        VIEW
-                                      </button>
-                                    )}
-                                  </td>
-                                  <td>
-                                    {data.notice_of_award && (
-                                      <button
-                                        className={style.viewbutton}
-                                        onClick={() =>
-                                          handlePdfView(
-                                            "http://localhost:5000/" +
-                                              data.notice_of_award
-                                          )
-                                        }
-                                      >
-                                        VIEW
-                                      </button>
-                                    )}
-                                  </td>
-                                  <td>
-                                    {data.contract && (
-                                      <button
-                                        className={style.viewbutton}
-                                        onClick={() =>
-                                          handlePdfView(
-                                            "http://localhost:5000/" +
-                                              data.contract
-                                          )
-                                        }
-                                      >
-                                        VIEW
-                                      </button>
-                                    )}
-                                  </td>
-                                  <td>
-                                    {data.notice_to_proceed && (
-                                      <button
-                                        className={style.viewbutton}
-                                        onClick={() =>
-                                          handlePdfView(
-                                            "http://localhost:5000/" +
-                                              data.notice_to_proceed
-                                          )
-                                        }
-                                      >
-                                        VIEW
-                                      </button>
-                                    )}
-                                  </td>
-                                  <td>
-                                    {data.philgeps_award_notice && (
-                                      <button
-                                        className={style.viewbutton}
-                                        onClick={() =>
-                                          handlePdfView(
-                                            "http://localhost:5000/" +
-                                              data.philgeps_award_notice
-                                          )
-                                        }
-                                      >
-                                        VIEW
-                                      </button>
-                                    )}
-                                  </td>
-                                  <td>
-                                    {convertDateFormat(data.date_published)}
-                                  </td>
-                                </tr>
+                                projectYear === clickedYear &&
+                                isBidding &&
+                                ((isOngoing && isOngoingActive) ||
+                                  (isCompleted && isCompletedActive))
                               );
-                            } else {
-                              return null; // Return null for rows that don't match the ongoing/completed status
-                            }
-                          })}
+                            })
+                            .map((data, index) => (
+                              <tr key={index}>
+                                <td>{data.pr_no}</td>
+                                <td>{data.title}</td>
+                                <td>{data.contractor}</td>
+                                <td>{data.contract_amount}</td>
+                                <td>
+                                  {data.bac_resolution && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.bac_resolution
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.notice_of_award && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.notice_of_award
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.contract && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.contract
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.notice_to_proceed && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.notice_to_proceed
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.philgeps_award_notice && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.philgeps_award_notice
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {convertDateFormat(data.date_published)}
+                                </td>
+                              </tr>
+                            ))}
                       </tbody>
                       <div>
                         <NextPages />
@@ -367,11 +368,12 @@ const CalendarYear = () => {
               </table>
             </div>
           )}
+
           {activeSection === "Alternative" && (
             <div className={style.tablealternativecontainer}>
               <h2>List of Alternative / {clickedYear}</h2>
 
-              <table className={style.table}>
+              <table className={style.TableContent}>
                 <thead>
                   <tr>
                     {/* Ongoing button */}
@@ -422,89 +424,109 @@ const CalendarYear = () => {
                       </thead>
                       <tbody className={style.TableRowColor}>
                         {projectList &&
-                          projectList.map((data, index) => (
-                            <tr key={index}>
-                              <td>{data.pr_no}</td>
-                              <td>{data.title}</td>
-                              <td>{data.contractor}</td>
-                              <td>{data.contract_amount}</td>
-                              <td>
-                                {data.bac_resolution && (
-                                  <button
-                                    className={style.viewbutton}
-                                    onClick={() =>
-                                      handlePdfView(
-                                        "http://localhost:5000/" +
-                                          data.bac_resolution
-                                      )
-                                    }
-                                  >
-                                    VIEW
-                                  </button>
-                                )}
-                              </td>
-                              <td>
-                                {data.notice_of_award && (
-                                  <button
-                                    className={style.viewbutton}
-                                    onClick={() =>
-                                      handlePdfView(
-                                        "http://localhost:5000/" +
-                                          data.notice_of_award
-                                      )
-                                    }
-                                  >
-                                    VIEW
-                                  </button>
-                                )}
-                              </td>
-                              <td>
-                                {data.contract && (
-                                  <button
-                                    className={style.viewbutton}
-                                    onClick={() =>
-                                      handlePdfView(
-                                        "http://localhost:5000/" + data.contract
-                                      )
-                                    }
-                                  >
-                                    VIEW
-                                  </button>
-                                )}
-                              </td>
-                              <td>
-                                {data.notice_to_proceed && (
-                                  <button
-                                    className={style.viewbutton}
-                                    onClick={() =>
-                                      handlePdfView(
-                                        "http://localhost:5000/" +
-                                          data.notice_to_proceed
-                                      )
-                                    }
-                                  >
-                                    VIEW
-                                  </button>
-                                )}
-                              </td>
-                              <td>
-                                {data.philgeps_award_notice && (
-                                  <button
-                                    className={style.viewbutton}
-                                    onClick={() =>
-                                      handlePdfView(
-                                        "http://localhost:5000/" +
-                                          data.philgeps_award_notice
-                                      )
-                                    }
-                                  >
-                                    VIEW
-                                  </button>
-                                )}
-                              </td>
-                              <td>{convertDateFormat(data.date_published)}</td>
-                            </tr>
-                          ))}
+                          projectList
+                            .filter((data) => {
+                              const projectYear = new Date(data.date_published)
+                                .getFullYear()
+                                .toString();
+                              const isAlternative = data.type === 2;
+                              const isOngoing =
+                                data.status.toLowerCase() === "ongoing";
+                              const isCompleted =
+                                data.status.toLowerCase() === "completed";
+                              return (
+                                projectYear === clickedYear &&
+                                isAlternative &&
+                                ((isOngoing && isOngoingActive) ||
+                                  (isCompleted && isCompletedActive))
+                              );
+                            })
+                            .map((data, index) => (
+                              <tr key={index}>
+                                <td>{data.pr_no}</td>
+                                <td>{data.title}</td>
+                                <td>{data.contractor}</td>
+                                <td>{data.contract_amount}</td>
+                                <td>
+                                  {data.bac_resolution && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.bac_resolution
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.notice_of_award && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.notice_of_award
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.contract && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.contract
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.notice_to_proceed && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.notice_to_proceed
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {data.philgeps_award_notice && (
+                                    <button
+                                      className={style.viewbutton}
+                                      onClick={() =>
+                                        handlePdfView(
+                                          "http://localhost:5000/" +
+                                            data.philgeps_award_notice
+                                        )
+                                      }
+                                    >
+                                      VIEW
+                                    </button>
+                                  )}
+                                </td>
+                                <td>
+                                  {convertDateFormat(data.date_published)}
+                                </td>
+                              </tr>
+                            ))}
                       </tbody>
                       <div>
                         <NextPages />

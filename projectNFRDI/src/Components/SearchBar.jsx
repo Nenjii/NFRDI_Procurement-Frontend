@@ -24,16 +24,18 @@ const SearchBar = ({ onSearch }) => {
       <input
         type="text"
         className={style.placeholdercolor}
-        placeholder="Search here..."
+        placeholder="Procurement search here..."
         value={searchValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        title="Please search here for the procurement title, PR number, bidding/alternative method (if applicable), status (ongoing or completed), or simply the year."
       />
       <div onClick={handleSearch}>
         <BsSearch
           color="#f5f5f5"
           size={36}
           className={style.bodySearchButton}
+          title="Search"
         />
       </div>
     </div>
