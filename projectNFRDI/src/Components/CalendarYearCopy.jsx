@@ -51,6 +51,8 @@ const CalendarYear = () => {
   const [activeYear, setActiveYear] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
   const [clickedYear, setClickedYear] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const toggleYearContent = (year, section) => {
     if (activeYear === year && activeSection === section) {
@@ -359,8 +361,36 @@ const CalendarYear = () => {
                               </tr>
                             ))}
                       </tbody>
-                      <div>
-                        <NextPages />
+                      <div className={style.tablePage}>
+                        <div className={style.tablePageNumber}>
+                          Page {currentPage} of {totalPages}
+                        </div>
+                        {currentPage > 1 && (
+                          <div
+                            className={style.tablePreviousPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage - 1)
+                            }
+                          >
+                            Previous Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormPrevious size={25} />
+                            </div>
+                          </div>
+                        )}
+                        {currentPage < totalPages && (
+                          <div
+                            className={style.tableNextPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage + 1)
+                            }
+                          >
+                            Next Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormNext size={25} />
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </>
                   )}
@@ -528,8 +558,36 @@ const CalendarYear = () => {
                               </tr>
                             ))}
                       </tbody>
-                      <div>
-                        <NextPages />
+                      <div className={style.tablePage}>
+                        <div className={style.tablePageNumber}>
+                          Page {currentPage} of {totalPages}
+                        </div>
+                        {currentPage > 1 && (
+                          <div
+                            className={style.tablePreviousPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage - 1)
+                            }
+                          >
+                            Previous Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormPrevious size={25} />
+                            </div>
+                          </div>
+                        )}
+                        {currentPage < totalPages && (
+                          <div
+                            className={style.tableNextPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage + 1)
+                            }
+                          >
+                            Next Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormNext size={25} />
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </>
                   )}
