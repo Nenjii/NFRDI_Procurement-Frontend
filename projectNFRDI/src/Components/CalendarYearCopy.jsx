@@ -5,7 +5,7 @@ import { IoAddCircle } from "react-icons/io5";
 import { FaWindowClose } from "react-icons/fa";
 import { useVisibilityToggles } from "../../src/utils/OngoComFunctions";
 import { RxOpenInNewWindow } from "react-icons/rx";
-
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 const YearContent = ({
   year,
   activeYear,
@@ -359,8 +359,36 @@ const CalendarYear = () => {
                               </tr>
                             ))}
                       </tbody>
-                      <div>
-                        <NextPages />
+                      <div className={style.tablePage}>
+                        <div className={style.tablePageNumber}>
+                          Page {currentPage} of {totalPages}
+                        </div>
+                        {currentPage > 1 && (
+                          <div
+                            className={style.tablePreviousPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage - 1)
+                            }
+                          >
+                            Previous Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormPrevious size={25} />
+                            </div>
+                          </div>
+                        )}
+                        {currentPage < totalPages && (
+                          <div
+                            className={style.tableNextPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage + 1)
+                            }
+                          >
+                            Next Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormNext size={25} />
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </>
                   )}
@@ -528,8 +556,36 @@ const CalendarYear = () => {
                               </tr>
                             ))}
                       </tbody>
-                      <div>
-                        <NextPages />
+                      <div className={style.tablePage}>
+                        <div className={style.tablePageNumber}>
+                          Page {currentPage} of {totalPages}
+                        </div>
+                        {currentPage > 1 && (
+                          <div
+                            className={style.tablePreviousPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage - 1)
+                            }
+                          >
+                            Previous Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormPrevious size={25} />
+                            </div>
+                          </div>
+                        )}
+                        {currentPage < totalPages && (
+                          <div
+                            className={style.tableNextPage}
+                            onClick={() =>
+                              setCurrentPage((prevPage) => prevPage + 1)
+                            }
+                          >
+                            Next Page
+                            <div className={style.tableNextIcon}>
+                              <GrFormNext size={25} />
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </>
                   )}

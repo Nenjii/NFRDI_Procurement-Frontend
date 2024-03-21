@@ -687,3 +687,46 @@ tr:hover {
   color: red;
   font-family: MontBold;
 }
+
+.tablePage {
+  color: #3b5998;
+  font-family: MontBold;
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  width: max-content;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 12px;
+}
+
+.tablePageNumber {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  font-family: MontSemiBold;
+  padding-bottom: 10px;
+}
+
+.tableNextPage {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.tableNextIcon {
+  display: flex;
+  align-self: center;
+}
+
+.tableNextPage:hover,
+.tablePreviousPage:hover {
+  cursor: pointer;
+}
+
+.tablePreviousPage {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
