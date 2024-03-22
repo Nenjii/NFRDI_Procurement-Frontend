@@ -104,9 +104,27 @@ const CalendarYear = () => {
   const itemsPerPage = 6;
 
   useEffect(() => {
-    // Calculate total pages based on the number of items in projectList
-    setTotalPages(Math.ceil(projectList.length / itemsPerPage));
-  }, [projectList]);
+    const filteredProjectList = projectList.filter((data) => {
+      const projectYear = new Date(data.date_published)
+        .getFullYear()
+        .toString();
+      return (
+        projectYear === clickedYear && // Match the year
+        ((activeSection === "Bidding" && data.type === 1) ||
+          (activeSection === "Alternative" && data.type === 2)) && // Match the section
+        ((isOngoingActive && data.status.toLowerCase() === "ongoing") ||
+          (isCompletedActive && data.status.toLowerCase() === "completed"))
+      ); // Match the status
+    });
+    const totalPages = Math.ceil(filteredProjectList.length / itemsPerPage);
+    setTotalPages(totalPages);
+  }, [
+    projectList,
+    clickedYear,
+    activeSection,
+    isOngoingActive,
+    isCompletedActive,
+  ]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -124,98 +142,91 @@ const CalendarYear = () => {
   const endIndex = Math.min(startIndex + itemsPerPage, projectList.length);
 
   const renderTableRows = () => {
-    return projectList
-      .filter((data) => {
-        // Filter the projectList based on the selected year, type, and status
-        const projectYear = new Date(data.date_published)
-          .getFullYear()
-          .toString();
-        const isBidding = activeSection === "Bidding";
-        const isAlternative = activeSection === "Alternative";
-        const isOngoing = data.status.toLowerCase() === "ongoing";
-        const isCompleted = data.status.toLowerCase() === "completed";
-        return (
-          projectYear === clickedYear && // Match the year
-          ((isBidding && data.type === 1) ||
-            (isAlternative && data.type === 2)) && // Match the type
-          ((isOngoing && isOngoingActive) || (isCompleted && isCompletedActive)) // Match the status
-        );
-      })
-      .slice(startIndex, endIndex) // Apply pagination
-      .map((data, index) => (
-        // Render table rows for the filtered data
-        <tr key={index}>
-          <td>{data.pr_no}</td>
-          <td>{data.title}</td>
-          <td>{data.contractor}</td>
-          <td>{data.contract_amount}</td>
-          <td>
-            {data.bac_resolution && (
-              <button
-                className={style.viewbutton}
-                onClick={() =>
-                  handlePdfView("http://localhost:5000/" + data.bac_resolution)
-                }
-              >
-                VIEW
-              </button>
-            )}
-          </td>
-          <td>
-            {data.notice_of_award && (
-              <button
-                className={style.viewbutton}
-                onClick={() =>
-                  handlePdfView("http://localhost:5000/" + data.notice_of_award)
-                }
-              >
-                VIEW
-              </button>
-            )}
-          </td>
-          <td>
-            {data.contract && (
-              <button
-                className={style.viewbutton}
-                onClick={() =>
-                  handlePdfView("http://localhost:5000/" + data.contract)
-                }
-              >
-                VIEW
-              </button>
-            )}
-          </td>
-          <td>
-            {data.notice_to_proceed && (
-              <button
-                className={style.viewbutton}
-                onClick={() =>
-                  handlePdfView(
-                    "http://localhost:5000/" + data.notice_to_proceed
-                  )
-                }
-              >
-                VIEW
-              </button>
-            )}
-          </td>
-          <td>
-            {data.philgeps_award_notice && (
-              <button
-                className={style.viewbutton}
-                onClick={() =>
-                  handlePdfView(
-                    "http://localhost:5000/" + data.philgeps_award_notice
-                  )
-                }
-              >
-                VIEW
-              </button>
-            )}
-          </td>
-          <td>{convertDateFormat(data.date_published)}</td>
-        </tr>
-      ));
+    const filteredProjects = projectList.filter((data) => {
+      const projectYear = new Date(data.date_published)
+        .getFullYear()
+        .toString();
+      return (
+        projectYear === clickedYear &&
+        ((activeSection === "Bidding" && data.type === 1) ||
+          (activeSection === "Alternative" && data.type === 2)) &&
+        ((isOngoingActive && data.status.toLowerCase() === "ongoing") ||
+          (isCompletedActive && data.status.toLowerCase() === "completed"))
+      );
+    });
+    const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
+
+    return paginatedProjects.map((data, index) => (
+      <tr key={index}>
+        <td>{data.pr_no}</td>
+        <td>{data.title}</td>
+        <td>{data.contractor}</td>
+        <td>{data.contract_amount}</td>
+        <td>
+          {data.bac_resolution && (
+            <button
+              className={style.viewbutton}
+              onClick={() =>
+                handlePdfView("http://localhost:5000/" + data.bac_resolution)
+              }
+            >
+              VIEW
+            </button>
+          )}
+        </td>
+        <td>
+          {data.notice_of_award && (
+            <button
+              className={style.viewbutton}
+              onClick={() =>
+                handlePdfView("http://localhost:5000/" + data.notice_of_award)
+              }
+            >
+              VIEW
+            </button>
+          )}
+        </td>
+        <td>
+          {data.contract && (
+            <button
+              className={style.viewbutton}
+              onClick={() =>
+                handlePdfView("http://localhost:5000/" + data.contract)
+              }
+            >
+              VIEW
+            </button>
+          )}
+        </td>
+        <td>
+          {data.notice_to_proceed && (
+            <button
+              className={style.viewbutton}
+              onClick={() =>
+                handlePdfView("http://localhost:5000/" + data.notice_to_proceed)
+              }
+            >
+              VIEW
+            </button>
+          )}
+        </td>
+        <td>
+          {data.philgeps_award_notice && (
+            <button
+              className={style.viewbutton}
+              onClick={() =>
+                handlePdfView(
+                  "http://localhost:5000/" + data.philgeps_award_notice
+                )
+              }
+            >
+              VIEW
+            </button>
+          )}
+        </td>
+        <td>{convertDateFormat(data.date_published)}</td>
+      </tr>
+    ));
   };
 
   return (
@@ -373,14 +384,14 @@ const CalendarYear = () => {
                       </tbody>
                       <div className={style.tablePage}>
                         <div className={style.tablePageNumber}>
-                          Page {currentPage} of {totalPages}
+                          {totalPages > 0
+                            ? `Page ${currentPage} of ${totalPages}`
+                            : "No PROCUREMENTS available as of the moment."}
                         </div>
                         {currentPage > 1 && (
                           <div
                             className={style.tablePreviousPage}
-                            onClick={() =>
-                              setCurrentPage((prevPage) => prevPage - 1)
-                            }
+                            onClick={handlePreviousPage}
                           >
                             Previous Page
                             <div className={style.tableNextIcon}>
@@ -391,9 +402,7 @@ const CalendarYear = () => {
                         {currentPage < totalPages && (
                           <div
                             className={style.tableNextPage}
-                            onClick={() =>
-                              setCurrentPage((prevPage) => prevPage + 1)
-                            }
+                            onClick={handleNextPage}
                           >
                             Next Page
                             <div className={style.tableNextIcon}>
@@ -467,14 +476,14 @@ const CalendarYear = () => {
                       </tbody>
                       <div className={style.tablePage}>
                         <div className={style.tablePageNumber}>
-                          Page {currentPage} of {totalPages}
+                          {totalPages > 0
+                            ? `Page ${currentPage} of ${totalPages}`
+                            : "No PROCUREMENTS available as of the moment."}
                         </div>
                         {currentPage > 1 && (
                           <div
                             className={style.tablePreviousPage}
-                            onClick={() =>
-                              setCurrentPage((prevPage) => prevPage - 1)
-                            }
+                            onClick={handlePreviousPage}
                           >
                             Previous Page
                             <div className={style.tableNextIcon}>
@@ -485,9 +494,7 @@ const CalendarYear = () => {
                         {currentPage < totalPages && (
                           <div
                             className={style.tableNextPage}
-                            onClick={() =>
-                              setCurrentPage((prevPage) => prevPage + 1)
-                            }
+                            onClick={handleNextPage}
                           >
                             Next Page
                             <div className={style.tableNextIcon}>
