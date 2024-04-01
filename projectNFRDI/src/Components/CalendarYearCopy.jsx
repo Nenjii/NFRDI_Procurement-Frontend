@@ -63,10 +63,12 @@ const CalendarYear = () => {
       setActiveYear(null);
       setActiveSection(null);
       setClickedYear(null);
+      setCurrentPage(1); // Reset currentPage to 1
     } else {
       setActiveYear(year);
       setActiveSection(section);
       setClickedYear(year); // Set the clicked year
+      setCurrentPage(1); // Reset currentPage to 1
     }
   };
 
@@ -125,6 +127,10 @@ const CalendarYear = () => {
     isOngoingActive,
     isCompletedActive,
   ]);
+
+  useEffect(() => {
+    setCurrentPage(1); // Reset currentPage when ongoing/completed toggles are changed
+  }, [isOngoingActive, isCompletedActive]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
