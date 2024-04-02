@@ -3,7 +3,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const SearchContent = ({ searchTerm }) => {
+const SearchContent = ({ searchTerm, onContentClick }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -102,7 +102,11 @@ const SearchContent = ({ searchTerm }) => {
       </div>
 
       {filteredData.slice(startIndex, endIndex).map((item, index) => (
-        <div key={index} className={style.SearchContainer}>
+        <div
+          key={index}
+          className={style.SearchContainer}
+          onClick={() => onContentClick(item)}
+        >
           <div className={style.Searches} title={item.title}>
             {item.title.length > 145
               ? `${item.title.substring(0, 145)} . . .`
