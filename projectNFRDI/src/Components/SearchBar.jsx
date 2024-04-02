@@ -10,8 +10,12 @@ const SearchBar = ({ onSearch }) => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      onSearch(searchValue);
+    if (e.key === "Enter" || e.key === "Backspace") {
+      if (searchValue.trim() === "" && e.key === "Backspace") {
+        onSearch(""); // Call onSearch with empty string when backspace is pressed and searchValue is empty
+      } else if (e.key === "Enter") {
+        onSearch(searchValue);
+      }
     }
   };
 

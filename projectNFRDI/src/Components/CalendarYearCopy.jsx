@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import style from "../Components/CalendarYearCopy.module.css";
-import NextPages from "../Components/NextPages";
 import { IoAddCircle } from "react-icons/io5";
 import { FaWindowClose } from "react-icons/fa";
 import { useVisibilityToggles } from "../../src/utils/OngoComFunctions";
@@ -318,7 +317,7 @@ const CalendarYear = () => {
       {pdfUrl && (
         <div className={style.pdfViewerContainer}>
           <div className={style.closeButton} onClick={closePdfViewer}>
-            <FaWindowClose size={23} />
+            <FaWindowClose size={20} />
           </div>
           <div
             className={style.viewInNewTabButton}
