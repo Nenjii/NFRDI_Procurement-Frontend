@@ -2,8 +2,9 @@ import React, { useState, useRef } from "react";
 import style from "../Components/SearchResult.module.css";
 import { FaWindowClose } from "react-icons/fa";
 import { RxOpenInNewWindow } from "react-icons/rx";
+import { TiArrowBack } from "react-icons/ti";
 
-const SearchResult = () => {
+const SearchResult = ({ clickedContent, onGoBack }) => {
   const [pdfUrl, setPdfUrl] = useState(null); // State to store the PDF URL
 
   const handlePdfView = (pdfUrl) => {
@@ -14,22 +15,51 @@ const SearchResult = () => {
     setPdfUrl(null);
   };
 
+  const handleGoBack = () => {
+    onGoBack(); // Call the onGoBack function to reset clickedContent state
+  };
+
+  const convertDateFormat = (date) => {
+    const options = { year: "numeric" };
+    const finalDate = new Date(date);
+    return finalDate.toLocaleDateString("en-US", options);
+  };
+
+  const getTypeString = (type) => {
+    switch (type) {
+      case 1:
+        return "Bidding";
+      case 2:
+        return "Alternative";
+      default:
+        return "Unknown Type"; // Fallback for unexpected type values
+    }
+  };
+
   return (
     <div className={style.container}>
       <div className={style.content}>
-        <p className={style.Shows}>Showing result of: PR Number 3393-23BAC</p>
+        <p className={style.Shows}>Showing result of: {clickedContent.pr_no}</p>
+        <div className={style.GoBack} onClick={handleGoBack}>
+          <TiArrowBack color="#1da1f2" size={25} />
+          Go Back{" "}
+        </div>
         <div className={style.Line}></div>
       </div>
 
       <div className={style.SearchContainer}>
-        <div className={style.PRNumbers}>PR Number: 3393-23BAC</div>
+        <div className={style.PRNumbers}>PR Number: {clickedContent.pr_no}</div>
       </div>
 
       <div className={style.SearchBoxContainer}>
         <div className={style.SearchBox}>
-          <div className={style.Boxes}>Bidding</div>
-          <div className={style.Boxes}>Completed</div>
-          <div className={style.Boxes}>2024</div>
+          <div className={style.Boxes}>
+            {getTypeString(clickedContent.type)}
+          </div>
+          <div className={style.Boxes}>{clickedContent.status}</div>
+          <div className={style.Boxes}>
+            {convertDateFormat(clickedContent.date_published)}
+          </div>
         </div>
       </div>
 
@@ -38,26 +68,25 @@ const SearchResult = () => {
           <tbody>
             <tr>
               <th className={style.tableheader}>Title / Project</th>
-              <td className={style.tablecontent}>
-                Supply of Labor and Materials for the Upgrading of Mass Rearing
-                House into Biological Control Laboratory at BPI-Davao National
-                Crop Research, Development and Production Support Center
-                (DNCRDPSC), Bago Oshiro, Davao City, Davao del Sur
-              </td>
+              <td className={style.tablecontent}>{clickedContent.title}</td>
             </tr>
             <tr>
               <th className={style.tableheader}>Contractor</th>
               <td className={style.tablecontent}>
-                GESCHAFT EQUIPMENT CORPORATION
+                {clickedContent.contractor}
               </td>
             </tr>
             <tr>
               <th className={style.tableheader}>Contract Amount</th>
-              <td className={style.tablecontent}>79,400.00</td>
+              <td className={style.tablecontent}>
+                {clickedContent.contract_amount}
+              </td>
             </tr>
             <tr>
               <th className={style.tableheader}>Date Published</th>
-              <td className={style.tablecontent}>January 19, 2024</td>
+              <td className={style.tablecontent}>
+                {convertDateFormat(clickedContent.date_published)}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -87,7 +116,9 @@ const SearchResult = () => {
                   <button
                     className={style.btn_SR_View}
                     onClick={() =>
-                      handlePdfView("../../public/pdfs/PR_No._1500-23BAC...pdf")
+                      handlePdfView(
+                        "http://localhost:5000/" + clickedContent.bac_resolution
+                      )
                     }
                   >
                     VIEW
@@ -102,7 +133,7 @@ const SearchResult = () => {
                   className={style.btn_SR_View}
                   onClick={() =>
                     handlePdfView(
-                      "../../public/pdfs/PR_No._1500-23CONTRACT.pdf"
+                      "http://localhost:5000/" + clickedContent.notice_of_award
                     )
                   }
                 >
@@ -116,7 +147,9 @@ const SearchResult = () => {
                 <button
                   className={style.btn_SR_View}
                   onClick={() =>
-                    handlePdfView("../../public/pdfs/PR_No._1500-23NOA.pdf")
+                    handlePdfView(
+                      "http://localhost:5000/" + clickedContent.contract
+                    )
                   }
                 >
                   VIEW
@@ -129,7 +162,10 @@ const SearchResult = () => {
                 <button
                   className={style.btn_SR_View}
                   onClick={() =>
-                    handlePdfView("../../public/pdfs/PR_No._1500-23NTP.pdf")
+                    handlePdfView(
+                      "http://localhost:5000/" +
+                        clickedContent.notice_to_proceed
+                    )
                   }
                 >
                   VIEW
@@ -143,7 +179,8 @@ const SearchResult = () => {
                   className={style.btn_SR_View}
                   onClick={() =>
                     handlePdfView(
-                      "../../public/pdfs/PR_No._1500-23PhilGeps.pdf"
+                      "http://localhost:5000/" +
+                        clickedContent.philgeps_award_notice
                     )
                   }
                 >

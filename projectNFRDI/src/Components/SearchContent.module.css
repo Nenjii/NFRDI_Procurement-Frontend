@@ -45,8 +45,16 @@
   justify-content: space-between; /* Align items at the start and end */
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add drop shadow */
+  cursor: pointer;
 }
 
+.SearchContainer:hover {
+  background-color: #1da1f2;
+}
+
+.SearchContainer.active {
+  background-color: #69ddff;
+}
 .Line {
   flex-direction: column;
   border-bottom: 2px solid #69ddff; /* Adjust color and thickness as needed */
