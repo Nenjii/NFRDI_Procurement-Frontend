@@ -102,7 +102,7 @@ const CalendarYear = () => {
     return finalDate.toLocaleDateString("en-US", options);
   };
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
 
   useEffect(() => {
     const filteredProjectList = projectList.filter((data) => {

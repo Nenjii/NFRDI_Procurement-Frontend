@@ -36,11 +36,13 @@
   display: flex;
   font-family: MontSemiBold;
   color: #f5f5f5;
-  justify-content: end;
+  margin-left: 89rem;
   align-items: center;
   cursor: pointer;
   margin-top: -25px;
   margin-bottom: 0.625rem;
+  width: fit-content;
+  justify-content: end;
 }
 
 .GoBack:hover {
