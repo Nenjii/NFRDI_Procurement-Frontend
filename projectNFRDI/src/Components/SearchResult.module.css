@@ -23,6 +23,10 @@
   transform: translateX(-50%); /* Center the triangle horizontally */
 }
 
+.content {
+  padding-bottom: 1px;
+}
+
 .Shows {
   color: #f5f5f5;
   font-family: MontBold;
@@ -131,8 +135,9 @@ table {
   color: #f5f5f5;
   background-color: #3b5998;
   border: #f5f5f5 0.0625rem solid;
-  font-size: 1.4375rem;
+  font-size: 18px;
   padding: 1.8125rem;
+  white-space: normal;
 }
 
 .tablePDFContent {
@@ -159,25 +164,20 @@ table {
   background-color: transparent;
 }
 
-button:focus {
-  background-color: #f5f5f5;
-  color: #3b5998;
-  outline: none;
-}
-
 .btn_SR_View {
   background-color: #f5f5f5;
   font-family: MontBold;
   color: #3b5998;
   padding: 10px;
   border: none;
-  width: 70px;
+  width: fit-content;
   left: 0;
   margin-right: 28.9375rem;
+  cursor: pointer;
+  z-index: 1001;
 }
 
 .btn_SR_View:hover {
-  cursor: pointer;
   background-color: #1da1f2;
   transform: scale(110%);
 }
@@ -190,134 +190,6 @@ button:focus {
   border: #f5f5f5 2px solid;
   background-color: #3b5998;
   color: #f5f5f5;
-}
-
-@-webkit-keyframes extend {
-  0% {
-    width: 70px;
-    border-radius: 100px;
-  }
-  10% {
-    width: 70px;
-    background: #fff;
-    margin-left: -5px;
-    margin-top: -5px;
-  }
-  20% {
-    width: 70px;
-    margin-left: 0px;
-    margin-top: 0px;
-  }
-  100% {
-    width: 70px;
-  }
-}
-@keyframes extend {
-  0% {
-    width: 70px;
-  }
-  10% {
-    width: 70px;
-    background: #fff;
-    margin-left: -5px;
-    margin-top: -5px;
-  }
-  20% {
-    width: 70px;
-    margin-left: 0px;
-    margin-top: 0px;
-  }
-  100% {
-    width: 70px;
-    border-radius: 100px;
-  }
-}
-
-@-webkit-keyframes disappear {
-  0% {
-    opacity: 1;
-  }
-  20% {
-    color: #fff;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes disappear {
-  0% {
-    opacity: 1;
-  }
-  20% {
-    color: #fff;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes appear {
-  0% {
-    opacity: 0;
-  }
-  70% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes appear {
-  0% {
-    opacity: 0;
-  }
-  70% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-button:focus {
-  /*animation*/
-  -webkit-animation: extend 1s ease-in-out;
-  -ms-animation: extend 1s ease-in-out;
-  animation: extend 1s ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-  /* Chrome, Safari, Opera */
-  animation-fill-mode: forwards;
-}
-
-button:focus > span {
-  /*animation*/
-  -webkit-animation: disappear 1s ease-in-out;
-  -ms-animation: disappear 1s ease-in-out;
-  animation: disappear 1s ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-  /* Chrome, Safari, Opera */
-  animation-fill-mode: forwards;
-}
-
-.view {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  opacity: 1;
-}
-
-button:focus > .view {
-  /*animation*/
-  -webkit-animation: appear 1s ease-in-out;
-  -ms-animation: appear 1s ease-in-out;
-  animation: appear 1s ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-  /* Chrome, Safari, Opera */
-  animation-fill-mode: forwards;
 }
 
 .ResultpdfViewerContainer {
@@ -334,6 +206,7 @@ button:focus > .view {
   border-radius: 0.625rem;
   margin-top: 200px;
   margin-right: 11.875rem;
+  z-index: 1000;
 }
 
 .ResultpdfViewerContainer iframe {

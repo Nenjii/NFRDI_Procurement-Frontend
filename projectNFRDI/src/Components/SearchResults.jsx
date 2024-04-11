@@ -6,9 +6,17 @@ import { TiArrowBack } from "react-icons/ti";
 
 const SearchResult = ({ clickedContent, onGoBack }) => {
   const [pdfUrl, setPdfUrl] = useState(null); // State to store the PDF URL
+  const [focusedButton, setFocusedButton] = useState(null); // State to track focused button
 
-  const handlePdfView = (pdfUrl) => {
-    setPdfUrl(pdfUrl);
+  const handlePdfView = (newPdfUrl, buttonId) => {
+    // Close previously opened PDF if any
+    if (pdfUrl) {
+      setPdfUrl(null);
+    }
+    // Open new PDF
+    setPdfUrl(newPdfUrl);
+    // Set the focused button
+    setFocusedButton(buttonId);
   };
 
   const closePdfViewer = () => {
@@ -34,6 +42,11 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
       default:
         return "Unknown Type"; // Fallback for unexpected type values
     }
+  };
+
+  const handleContainerBlur = () => {
+    // Remove focus when clicking outside the buttons
+    setFocusedButton(null);
   };
 
   return (
@@ -112,80 +125,167 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
             <tr>
               <th className={style.tablePDF}>BAC Resolution</th>
               <td>
-                <div>
-                  <button
-                    className={style.btn_SR_View}
-                    onClick={() =>
-                      handlePdfView(
-                        "http://localhost:5000/" + clickedContent.bac_resolution
-                      )
-                    }
-                  >
-                    VIEW
-                  </button>
-                </div>
+                {clickedContent.bac_resolution ? (
+                  <div>
+                    <button
+                      className={`${style.btn_SR_View} ${
+                        focusedButton === "bac_resolution" ? "active" : ""
+                      }`}
+                      onClick={() =>
+                        handlePdfView(
+                          "http://localhost:5000/" +
+                            clickedContent.bac_resolution,
+                          "bac_resolution"
+                        )
+                      }
+                    >
+                      VIEW
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className={style.btn_SR_View}
+                      disabled
+                      title="PDF content unavailable or not yet uploaded."
+                    >
+                      No PDF Available
+                    </button>
+                  </div>
+                )}
               </td>
             </tr>
             <tr>
               <th className={style.tablePDF}>Notice of Award</th>
               <td>
-                <button
-                  className={style.btn_SR_View}
-                  onClick={() =>
-                    handlePdfView(
-                      "http://localhost:5000/" + clickedContent.notice_of_award
-                    )
-                  }
-                >
-                  VIEW
-                </button>
+                {clickedContent.notice_of_award ? (
+                  <div>
+                    <button
+                      className={`${style.btn_SR_View} ${
+                        focusedButton === "notice_of_award" ? "active" : ""
+                      }`}
+                      onClick={() =>
+                        handlePdfView(
+                          "http://localhost:5000/" +
+                            clickedContent.notice_of_award,
+                          "notice_of_award"
+                        )
+                      }
+                    >
+                      VIEW
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className={style.btn_SR_View}
+                      disabled
+                      title="PDF content unavailable or not yet uploaded."
+                    >
+                      No PDF Available
+                    </button>
+                  </div>
+                )}
               </td>
             </tr>
             <tr>
               <th className={style.tablePDF}>Contract</th>
               <td>
-                <button
-                  className={style.btn_SR_View}
-                  onClick={() =>
-                    handlePdfView(
-                      "http://localhost:5000/" + clickedContent.contract
-                    )
-                  }
-                >
-                  VIEW
-                </button>
+                {clickedContent.contract ? (
+                  <div>
+                    <button
+                      className={`${style.btn_SR_View} ${
+                        focusedButton === "contract" ? "active" : ""
+                      }`}
+                      onClick={() =>
+                        handlePdfView(
+                          "http://localhost:5000/" + clickedContent.contract,
+                          "contract"
+                        )
+                      }
+                    >
+                      VIEW
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className={style.btn_SR_View}
+                      disabled
+                      title="PDF content unavailable or not yet uploaded."
+                    >
+                      No PDF Available
+                    </button>
+                  </div>
+                )}
               </td>
             </tr>
             <tr>
               <th className={style.tablePDF}>Notice to Proceed</th>
               <td>
-                <button
-                  className={style.btn_SR_View}
-                  onClick={() =>
-                    handlePdfView(
-                      "http://localhost:5000/" +
-                        clickedContent.notice_to_proceed
-                    )
-                  }
-                >
-                  VIEW
-                </button>
+                {clickedContent.notice_to_proceed ? (
+                  <div>
+                    <button
+                      className={`${style.btn_SR_View} ${
+                        focusedButton === "notice_to_proceed" ? "active" : ""
+                      }`}
+                      onClick={() =>
+                        handlePdfView(
+                          "http://localhost:5000/" +
+                            clickedContent.notice_to_proceed,
+                          "notice_to_proceed"
+                        )
+                      }
+                    >
+                      VIEW
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className={style.btn_SR_View}
+                      disabled
+                      title="PDF content unavailable or not yet uploaded."
+                    >
+                      No PDF Available
+                    </button>
+                  </div>
+                )}
               </td>
             </tr>
             <tr>
               <th className={style.tablePDF}> Philgeps Award Notice</th>
               <td>
-                <button
-                  className={style.btn_SR_View}
-                  onClick={() =>
-                    handlePdfView(
-                      "http://localhost:5000/" +
-                        clickedContent.philgeps_award_notice
-                    )
-                  }
-                >
-                  VIEW
-                </button>
+                {clickedContent.philgeps_award_notice ? (
+                  <div>
+                    <button
+                      className={`${style.btn_SR_View} ${
+                        focusedButton === "philgeps_award_notice"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        handlePdfView(
+                          "http://localhost:5000/" +
+                            clickedContent.philgeps_award_notice,
+                          "philgeps_award_notice"
+                        )
+                      }
+                    >
+                      VIEW
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className={style.btn_SR_View}
+                      disabled
+                      title="PDF content unavailable or not yet uploaded."
+                    >
+                      No PDF Available
+                    </button>
+                  </div>
+                )}
               </td>
             </tr>
           </tbody>
