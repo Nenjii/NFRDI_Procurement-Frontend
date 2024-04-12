@@ -52,7 +52,9 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
   return (
     <div className={style.container}>
       <div className={style.content}>
-        <p className={style.Shows}>Showing result of: {clickedContent.pr_no}</p>
+        <p className={style.Shows} title={clickedContent.pr_no}>
+          Showing result of: {clickedContent.pr_no}
+        </p>
         <div className={style.GoBack} onClick={handleGoBack}>
           <TiArrowBack color="#1da1f2" size={25} />
           Go Back{" "}
@@ -61,16 +63,26 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
       </div>
 
       <div className={style.SearchContainer}>
-        <div className={style.PRNumbers}>PR Number: {clickedContent.pr_no}</div>
+        <div className={style.PRNumbers} title={clickedContent.pr_no}>
+          PR Number: {clickedContent.pr_no}
+        </div>
       </div>
 
       <div className={style.SearchBoxContainer}>
         <div className={style.SearchBox}>
-          <div className={style.Boxes}>
+          <div
+            className={style.Boxes}
+            title={getTypeString(clickedContent.type)}
+          >
             {getTypeString(clickedContent.type)}
           </div>
-          <div className={style.Boxes}>{clickedContent.status}</div>
-          <div className={style.Boxes}>
+          <div className={style.Boxes} title={clickedContent.status}>
+            {clickedContent.status}
+          </div>
+          <div
+            className={style.Boxes}
+            title={convertDateFormat(clickedContent.date_published)}
+          >
             {convertDateFormat(clickedContent.date_published)}
           </div>
         </div>
@@ -81,23 +93,34 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
           <tbody>
             <tr>
               <th className={style.tableheader}>Title / Project</th>
-              <td className={style.tablecontent}>{clickedContent.title}</td>
+              <td className={style.tablecontent} title={clickedContent.title}>
+                {clickedContent.title}
+              </td>
             </tr>
             <tr>
               <th className={style.tableheader}>Contractor</th>
-              <td className={style.tablecontent}>
+              <td
+                className={style.tablecontent}
+                title={clickedContent.contractor}
+              >
                 {clickedContent.contractor}
               </td>
             </tr>
             <tr>
               <th className={style.tableheader}>Contract Amount</th>
-              <td className={style.tablecontent}>
+              <td
+                className={style.tablecontent}
+                title={clickedContent.contract_amount}
+              >
                 {clickedContent.contract_amount}
               </td>
             </tr>
             <tr>
               <th className={style.tableheader}>Date Published</th>
-              <td className={style.tablecontent}>
+              <td
+                className={style.tablecontent}
+                title={convertDateFormat(clickedContent.date_published)}
+              >
                 {convertDateFormat(clickedContent.date_published)}
               </td>
             </tr>

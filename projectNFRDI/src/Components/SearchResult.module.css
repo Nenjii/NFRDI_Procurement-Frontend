@@ -196,15 +196,13 @@ table {
   position: absolute;
   width: 30%;
   height: 100%;
-  margin-left: 65%;
+  margin-left: 68%;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  padding: 3rem;
   padding-bottom: 0.625rem;
   border-radius: 0.625rem;
-  margin-top: 200px;
+  margin-top: 250px;
   margin-right: 11.875rem;
   z-index: 1000;
 }
@@ -220,12 +218,12 @@ table {
 .closeButton {
   font-size: 0.625rem;
   position: absolute;
-  top: 0;
+
   right: 0;
+  margin-top: -765px;
   margin-left: 10px;
   cursor: pointer;
-  margin: 0rem;
-  margin-right: 50px;
+  margin-right: 5px;
   font-family: MontBold;
   padding: 0.3125rem;
   display: flex;
@@ -243,10 +241,10 @@ table {
   font-size: 0.625rem;
   font-family: MontBold;
   position: absolute;
-  top: 0;
+  top: -43px;
   right: 0;
   cursor: pointer;
-  margin-right: 80px;
+  margin-right: 32px;
   padding: 0.3125rem;
   display: flex;
   justify-content: center;
