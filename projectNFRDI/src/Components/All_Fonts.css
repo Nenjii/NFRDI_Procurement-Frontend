@@ -29,3 +29,8 @@
   font-family: GaraBold;
   src: url("../../public/fonts/CormorantGaramond-Bold.ttf");
 }
+
+@font-face {
+  font-family: GaraMedIta;
+  src: url("../../public/fonts/CormorantGaramond-MediumItalic.ttf");
+}

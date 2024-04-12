@@ -6,16 +6,20 @@
   padding-top: 7.5rem;
   padding-left: 6.25rem;
   color: #f5f5f5;
-  font-size: 5rem;
+  font-size: 90px;
   z-index: 1;
   position: relative;
 }
 
 .bodyContentTitle1 {
-  font-family: GaraMed;
+  font-family: GaraMedIta;
 }
 
-.bodyContentTitle2,
-.bodyContentTitle3 {
+.bodyContentTitle2 {
+  font-size: 74px;
   font-family: GaraBoldIta;
+}
+
+.bodyContentTitle3 {
+  font-family: GaraMedIta;
 }
