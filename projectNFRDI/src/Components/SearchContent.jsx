@@ -3,12 +3,15 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// SearchContent component definition
 const SearchContent = ({ searchTerm, onContentClick }) => {
+  // State for holding filtered data, current page, total pages, and visibility
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isVisible, setIsVisible] = useState(false); // State to manage visibility
 
+  // useEffect hook to handle changes in searchTerm
   useEffect(() => {
     if (searchTerm) {
       getSearch();
@@ -19,6 +22,7 @@ const SearchContent = ({ searchTerm, onContentClick }) => {
     }
   }, [searchTerm]);
 
+  // Function to fetch search results from the server
   function getSearch() {
     axios.get("http://localhost:5000/getProject").then(function (response) {
       const searchData = response.data.filter((item) => {
@@ -54,12 +58,14 @@ const SearchContent = ({ searchTerm, onContentClick }) => {
     });
   }
 
+  // Function to convert date format
   const convertDateFormat = (date) => {
     const options = { year: "numeric" };
     const finalDate = new Date(date);
     return finalDate.toLocaleDateString("en-US", options);
   };
 
+  // Function to get type string based on type number
   const getTypeString = (type) => {
     switch (type) {
       case 1:
@@ -100,7 +106,7 @@ const SearchContent = ({ searchTerm, onContentClick }) => {
         )}
         <div className={style.Line}></div>
       </div>
-
+      {/* Render search results */}
       {filteredData.slice(startIndex, endIndex).map((item, index) => (
         <div
           key={index}
@@ -116,7 +122,6 @@ const SearchContent = ({ searchTerm, onContentClick }) => {
           <div className={style.SearchBoxes}>
             <div className={style.Boxes}>{"PR Number: " + item.pr_no}</div>
             <div className={style.Boxes}>{getTypeString(item.type)}</div>{" "}
-            {/* Use the function here */}
             <div className={style.Boxes}>{item.status}</div>
             <div className={style.Boxes}>
               {convertDateFormat(item.date_published)}
@@ -124,11 +129,12 @@ const SearchContent = ({ searchTerm, onContentClick }) => {
           </div>
         </div>
       ))}
-
+      {/* Pagination */}
       <div className={style.tablePage}>
         <div className={style.tablePageNumber}>
           Page {currentPage} of {totalPages}
         </div>
+        {/* Previous page button */}
         {currentPage > 1 && (
           <div
             className={style.tablePreviousPage}
@@ -140,6 +146,7 @@ const SearchContent = ({ searchTerm, onContentClick }) => {
             </div>
           </div>
         )}
+        {/* Next page button */}
         {currentPage < totalPages && (
           <div
             className={style.tableNextPage}

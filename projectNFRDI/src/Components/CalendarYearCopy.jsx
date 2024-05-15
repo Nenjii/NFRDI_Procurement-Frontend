@@ -1,3 +1,4 @@
+// Importing necessary modules and components
 import React, { useState, useRef, useEffect } from "react";
 import style from "../Components/CalendarYearCopy.module.css";
 import { IoAddCircle } from "react-icons/io5";
@@ -6,6 +7,7 @@ import { useVisibilityToggles } from "../../src/utils/OngoComFunctions";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
+// Defining the YearContent component
 const YearContent = ({
   year,
   activeYear,
@@ -47,7 +49,9 @@ const YearContent = ({
   </>
 );
 
+// Defining the CalendarYear component
 const CalendarYear = () => {
+  // State management using hooks
   const [activeYear, setActiveYear] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
   const [clickedYear, setClickedYear] = useState(null);
@@ -57,6 +61,7 @@ const CalendarYear = () => {
     JSON.parse(localStorage.getItem("projects"))
   );
 
+  // Function to toggle year content
   const toggleYearContent = (year, section) => {
     if (activeYear === year && activeSection === section) {
       setActiveYear(null);
@@ -71,14 +76,17 @@ const CalendarYear = () => {
     }
   };
 
+  // Ref for scrolling to bottom
   const containerRef = useRef(null);
 
+  // Function to scroll to the bottom of container
   const scrollToBottom = () => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
   };
 
+  // State to store PDF URL and functions to handle PDF viewing
   const [pdfUrl, setPdfUrl] = useState(null); // State to store the PDF URL
 
   const handlePdfView = (pdfUrl) => {
@@ -89,6 +97,7 @@ const CalendarYear = () => {
     setPdfUrl(null);
   };
 
+  // Custom hook for toggling visibility
   const {
     isOngoingActive,
     isCompletedActive,
@@ -96,14 +105,17 @@ const CalendarYear = () => {
     toggleCompletedVisibility,
   } = useVisibilityToggles(); // OngoCom Visibility when it is clicked
 
+  // Function to convert date format
   const convertDateFormat = (date) => {
     const options = { month: "short", day: "2-digit", year: "numeric" };
     const finalDate = new Date(date);
     return finalDate.toLocaleDateString("en-US", options);
   };
 
+  // Constants for pagination
   const itemsPerPage = 5;
 
+  // Effect to calculate total pages for pagination
   useEffect(() => {
     const filteredProjectList = projectList.filter((data) => {
       const projectYear = new Date(data.date_published)
@@ -127,10 +139,12 @@ const CalendarYear = () => {
     isCompletedActive,
   ]);
 
+  // Effect to reset currentPage when ongoing/completed toggles are changed
   useEffect(() => {
     setCurrentPage(1); // Reset currentPage when ongoing/completed toggles are changed
   }, [isOngoingActive, isCompletedActive]);
 
+  // Functions for handling pagination
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -143,9 +157,11 @@ const CalendarYear = () => {
     }
   };
 
+  // Calculating start and end index for pagination
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, projectList.length);
 
+  // Function to render table rows
   const renderTableRows = () => {
     const filteredProjects = projectList.filter((data) => {
       const projectYear = new Date(data.date_published)
@@ -237,15 +253,19 @@ const CalendarYear = () => {
   return (
     <div>
       <div className={style.bodyCalendarYear}>
+        {/* Render the Calendar Year header */}
         <div className={`${style.txtCalendarYear} ${style.animateCharacter}`}>
           Calendar Year
         </div>
 
+        {/* Render year content */}
         <div
           className={style.bodyContentCY}
           id={style.Lines}
           ref={containerRef}
         >
+          {/* Render YearContent component for each year */}
+          {/* Example: YearContent for year 2024 */}
           <YearContent
             year="2024"
             activeYear={activeYear}
@@ -307,13 +327,13 @@ const CalendarYear = () => {
             toggleYearContent={toggleYearContent}
           />
         </div>
-        {/* Repeat for other years */}
+        {/* Render button to browse other years */}
         <div className={style.CYotherYears} onClick={scrollToBottom}>
           <IoAddCircle className={style.Add} color="#1DA1F2" size={25} />
           <div>browse other years...</div>
         </div>
       </div>
-
+      {/* Render PDF viewer container if pdfUrl is not null */}
       {pdfUrl && (
         <div className={style.pdfViewerContainer}>
           <div className={style.closeButton} onClick={closePdfViewer}>
@@ -329,14 +349,19 @@ const CalendarYear = () => {
           <iframe src={pdfUrl} title="PDF Viewer"></iframe>
         </div>
       )}
+      {/* Only render the table if activeSection is Bidding or Alternative */}
       {(activeSection === "Bidding" || activeSection === "Alternative") && ( // Only render the table if activeSection is Bidding or Alternative
         <div className={style.tablecontainer}>
+          {/* Render table for Bidding section */}
           {activeSection === "Bidding" && (
             <div className={style.tablebiddingcontainer}>
+              {/* Render Bidding table header */}
               <h2>List of Bidding / {clickedYear}</h2>
-
+              {/* Render table for Bidding projects */}
               <table className={style.TableContent}>
                 <thead>
+                  {/* Render table headers */}
+                  {/* Ongoing and Completed buttons for toggling visibility */}
                   <tr>
                     {/* Ongoing button */}
                     <th
@@ -362,6 +387,7 @@ const CalendarYear = () => {
                     </th>
                   </tr>
                 </thead>
+                {/* Render a message if neither ongoing nor completed is active */}
                 <div className={style.Choose}>
                   {!isOngoingActive &&
                     !isCompletedActive &&
@@ -370,6 +396,7 @@ const CalendarYear = () => {
                 <>
                   {(isOngoingActive || isCompletedActive) && (
                     <>
+                      {/* Render table headers */}
                       <thead className={style.TableColumnColor}>
                         <tr>
                           <th>PR Number</th>
@@ -384,15 +411,18 @@ const CalendarYear = () => {
                           <th>Date Published</th>
                         </tr>
                       </thead>
+                      {/* Render table body with paginated projects */}
                       <tbody className={style.TableRowColor}>
                         {renderTableRows()}
                       </tbody>
+                      {/* Render pagination controls */}
                       <div className={style.tablePage}>
                         <div className={style.tablePageNumber}>
                           {totalPages > 0
                             ? `Page ${currentPage} of ${totalPages}`
                             : "No PROCUREMENTS available as of the moment."}
                         </div>
+                        {/* Render Previous Page button if currentPage is greater than 1 */}
                         {currentPage > 1 && (
                           <div
                             className={style.tablePreviousPage}
@@ -404,6 +434,7 @@ const CalendarYear = () => {
                             </div>
                           </div>
                         )}
+                        {/* Render Next Page button if currentPage is less than totalPages */}
                         {currentPage < totalPages && (
                           <div
                             className={style.tableNextPage}
@@ -422,13 +453,15 @@ const CalendarYear = () => {
               </table>
             </div>
           )}
-
+          {/* Render table for Alternative section */}
           {activeSection === "Alternative" && (
             <div className={style.tablealternativecontainer}>
               <h2>List of Alternative / {clickedYear}</h2>
-
+              {/* Render table for Alternative projects */}
               <table className={style.TableContent}>
                 <thead>
+                  {/* Render table headers */}
+                  {/* Ongoing and Completed buttons for toggling visibility */}
                   <tr>
                     {/* Ongoing button */}
                     <th
@@ -454,12 +487,14 @@ const CalendarYear = () => {
                     </th>
                   </tr>
                 </thead>
+                {/* Render a message if neither ongoing nor completed is active */}
                 <div className={style.Choose}>
                   {!isOngoingActive &&
                     !isCompletedActive &&
                     "Please select what you would like to display: 'Ongoing' or 'Completed'."}
                 </div>
                 <>
+                  {/* Render table headers */}
                   {(isOngoingActive || isCompletedActive) && (
                     <>
                       <thead className={style.TableColumnColor}>
@@ -476,6 +511,7 @@ const CalendarYear = () => {
                           <th>Date Published</th>
                         </tr>
                       </thead>
+                      {/* Render table body with paginated projects */}
                       <tbody className={style.TableRowColor}>
                         {renderTableRows()}
                       </tbody>
@@ -485,6 +521,7 @@ const CalendarYear = () => {
                             ? `Page ${currentPage} of ${totalPages}`
                             : "No PROCUREMENTS available as of the moment."}
                         </div>
+                        {/* Render Previous Page button if currentPage is greater than 1 */}
                         {currentPage > 1 && (
                           <div
                             className={style.tablePreviousPage}
@@ -496,6 +533,7 @@ const CalendarYear = () => {
                             </div>
                           </div>
                         )}
+                        {/* Render Next Page button if currentPage is less than totalPages */}
                         {currentPage < totalPages && (
                           <div
                             className={style.tableNextPage}

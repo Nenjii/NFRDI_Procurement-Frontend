@@ -4,10 +4,13 @@ import { FaWindowClose } from "react-icons/fa";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { TiArrowBack } from "react-icons/ti";
 
+// SearchResult component definition
 const SearchResult = ({ clickedContent, onGoBack }) => {
+  // State to store the PDF URL and track focused button
   const [pdfUrl, setPdfUrl] = useState(null); // State to store the PDF URL
   const [focusedButton, setFocusedButton] = useState(null); // State to track focused button
 
+  // Function to handle opening PDF view
   const handlePdfView = (newPdfUrl, buttonId) => {
     // Close previously opened PDF if any
     if (pdfUrl) {
@@ -18,21 +21,21 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
     // Set the focused button
     setFocusedButton(buttonId);
   };
-
+  // Function to close PDF viewer
   const closePdfViewer = () => {
     setPdfUrl(null);
   };
-
+  // Function to handle going back
   const handleGoBack = () => {
     onGoBack(); // Call the onGoBack function to reset clickedContent state
   };
-
+  // Function to convert date format
   const convertDateFormat = (date) => {
     const options = { year: "numeric" };
     const finalDate = new Date(date);
     return finalDate.toLocaleDateString("en-US", options);
   };
-
+  // Function to get type string based on type number
   const getTypeString = (type) => {
     switch (type) {
       case 1:
@@ -43,7 +46,7 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
         return "Unknown Type"; // Fallback for unexpected type values
     }
   };
-
+  // Function to handle container blur
   const handleContainerBlur = () => {
     // Remove focus when clicking outside the buttons
     setFocusedButton(null);
@@ -91,6 +94,7 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
       <div className={style.tablecontainer}>
         <table>
           <tbody>
+            {/* Render table rows */}
             <tr>
               <th className={style.tableheader}>Title / Project</th>
               <td className={style.tablecontent} title={clickedContent.title}>
@@ -126,7 +130,7 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
             </tr>
           </tbody>
         </table>
-
+        {/* Render PDF viewer if pdfUrl is available */}
         {pdfUrl && (
           <div className={style.ResultpdfViewerContainer}>
             <div className={style.closeButton} onClick={closePdfViewer}>
@@ -142,7 +146,7 @@ const SearchResult = ({ clickedContent, onGoBack }) => {
             <iframe src={pdfUrl} title="PDF Viewer"></iframe>
           </div>
         )}
-
+        {/* Render PDF buttons */}
         <table>
           <tbody>
             <tr>

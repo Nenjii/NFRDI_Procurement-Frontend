@@ -9,7 +9,9 @@ import {
   FaYoutubeSquare,
 } from "react-icons/fa";
 
+// Defining the Header component
 const Header = () => {
+  // Arrays to hold months and days of the week
   const months = [
     "January",
     "February",
@@ -34,11 +36,15 @@ const Header = () => {
     "Saturday",
   ];
 
+  // Function to generate month based on index
   const generateMonth = (month) => months[month - 1];
+  // Function to generate day of the week based on index
   const generateDay = (day) => daysOfWeek[day];
 
+  // State for holding current time
   const [time, setTime] = useState(new Date());
 
+  // Effect to update time every second
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
@@ -46,6 +52,7 @@ const Header = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Extracting date, month, year, hours, minutes, seconds, and day of the week
   const day = time.getDate().toString();
   const month = time.getMonth().toString();
   const year = time.getFullYear().toString();
@@ -58,22 +65,26 @@ const Header = () => {
     <div className={style.headerbkg}>
       <div className={style.headercontent}>
         <div className={style.headercontentspaces}>
+          {/* Accessibility icon */}
           <div className={style.headerAcccessibility}>
             <RxAccessibility color="#69DDFF" size={25} />
             Accessibility
           </div>
         </div>
         <div className={style.headerIcons}>
+          {/* Go back to home link */}
           <div>
             <a className={style.headerGoBack} href="https://nfrdi.da.gov.ph/">
               <IoArrowBackCircle color="#69DDFF" size={25} />
               Go to Home
             </a>
           </div>
+          {/* Admin login */}
           <div className={style.headerAdminLogin}>
             <FaExternalLinkSquareAlt color="#69DDFF" size={20} />
             Admin login
           </div>
+          {/* Philippine Standard Time */}
           <div className={style.headerPST}>
             Philippine Standard Time:
             <p>{`${generateDay(daysOftheWeek)}, ${generateMonth(
@@ -83,11 +94,13 @@ const Header = () => {
         </div>
       </div>
       <div className={style.headercontentimage}>
+        {/* Image */}
         <img
           id={style.imagecontent}
           src="../../public/images/HeaderContentBelow2.svg"
           alt="HomeImage"
         />
+        {/* Social media icons */}
         <div className={style.headercontentsocmed}>
           <div>
             <a href="https://www.facebook.com/nfrdiphilippines" target="_blank">
